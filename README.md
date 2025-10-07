@@ -42,13 +42,13 @@ It’s built using **Expo**, **React Native**, and modern UI components to demon
 4. Start the project
    npx expo start
 
-📁 Project Structure
+## 📁 Project Structure
 
   Number-Hunter/
 │
 ├── assets/
 │   ├── fonts/
-│   ├── images/
+│   └── images/
 │
 ├── components/
 │   ├── game/
@@ -64,7 +64,8 @@ It’s built using **Expo**, **React Native**, and modern UI components to demon
 │
 └── App.js
 
-🧠 Gameplay Overview
+
+## 🧠 Gameplay Overview
 
 -  Player selects a number.
 
@@ -72,7 +73,7 @@ It’s built using **Expo**, **React Native**, and modern UI components to demon
 
 -  When the app guesses correctly, a game-over screen is displayed.
 
-## Features
+## 🧩 Features
 
 - Easy and fun number guessing gameplay  
 - Clean and simple design  
@@ -80,7 +81,7 @@ It’s built using **Expo**, **React Native**, and modern UI components to demon
 - Uses custom fonts and gradient background  
 - Displays game result when the app guesses your number
 
-🧑‍💻 Author
+## 🧑‍💻 Author
 
 Abhiraj Dighe
 📍 Developer & Designer
