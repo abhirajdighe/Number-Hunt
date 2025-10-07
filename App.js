@@ -1,32 +1,68 @@
 import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, StyleSheet} from 'react-native';
+import { ImageBackground, StyleSheet,View} from 'react-native';
 import StartGameScreen from './screens/StartGameScreen';
 import {LinearGradient} from 'expo-linear-gradient'
 import { useState } from 'react';
 import GameScreen from './screens/GameScreen';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Colors from './constants/colors';
+import GameOverScreen from './screens/GameOverScreen';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import { useEffect } from 'react';
 
 export default function App() {
   const[userNumber,setUserNumber]=useState();
+  const [gameIsOver,setGameIsOver] = useState(true);
+
+  const [fontsLoaded] = useFonts({
+    'open-sans':require('./assets/fonts/OpenSans-Regular.ttf'),
+    'open-sans-bold':require('./assets/fonts/OpenSans-Bold.ttf'),
+  });
+
+  useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return <View />; // return empty view until fonts load
+  }
+
 
   function pickedNumberHandler(pickedNumber){
     setUserNumber(pickedNumber);
+    setGameIsOver(false);
+  }
+
+  function gameOverHandler(){
+    setGameIsOver(true);
   }
 
   let screen = <StartGameScreen onPickNumber={pickedNumberHandler}/>;
 
   if(userNumber){
-    screen = <GameScreen/>
+    screen = <GameScreen userNumber={userNumber} onGameOver={gameOverHandler}/>
+  }
+
+  if(gameIsOver && userNumber){
+    screen = <GameOverScreen/>
   }
 
   return (
-    <LinearGradient colors={['#4e0329','#ddb52f']} style={styles.rootScreen}>
+    <LinearGradient colors={[Colors.primary700,Colors.accent500]} style={styles.rootScreen}>
       <ImageBackground 
         source={require('./assets/images/background.png')}
         resizeMode="cover"
         style={styles.rootScreen}
         imageStyle={styles.backgroundImage}
         >
-          {screen}
+
+          <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
+            
+          
+          
       </ImageBackground>
     </LinearGradient>
     
